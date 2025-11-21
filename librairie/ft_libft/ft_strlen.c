@@ -1,14 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   z_parsing.c                                        :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
+/*   By: macoulib <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/18 21:44:26 by macoulib          #+#    #+#             */
-/*   Updated: 2025/11/20 22:30:48 by macoulib         ###   ########.fr       */
+/*   Created: 2025/04/24 20:16:42 by macoulib          #+#    #+#             */
+/*   Updated: 2025/04/24 20:29:10 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
+size_t	ft_strlen( const char *theString )
+{
+	size_t	i;
 
-#include "../../includes/cub3d.h"
+	i = 0;
+	while (theString[i])
+		i++;
+	return (i);
+}

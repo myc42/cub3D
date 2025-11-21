@@ -1,14 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   z_parsing.c                                        :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
+/*   By: macoulib <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/18 21:44:26 by macoulib          #+#    #+#             */
-/*   Updated: 2025/11/20 22:30:48 by macoulib         ###   ########.fr       */
+/*   Created: 2025/04/24 21:24:50 by macoulib          #+#    #+#             */
+/*   Updated: 2025/04/24 21:40:15 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
+void	ft_bzero(void *s, size_t n)
+{
+	unsigned char	*scpy;
+	size_t			i;
 
-#include "../../includes/cub3d.h"
+	i = 0 ;
+	scpy = (unsigned char *) s;
+	while (n > i)
+	{
+		scpy[i] = '\0';
+		i++;
+	}
+}

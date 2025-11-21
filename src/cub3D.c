@@ -6,7 +6,16 @@
 /*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 21:43:28 by macoulib          #+#    #+#             */
-/*   Updated: 2025/11/18 21:43:29 by macoulib         ###   ########.fr       */
+/*   Updated: 2025/11/21 19:45:53 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../includes/cub3d.h"
+
+int	main(int ac, char **av)
+{
+    (void)ac;
+    (void)av;
+	printf("main");
+	return (0);
+}

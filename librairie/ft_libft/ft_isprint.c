@@ -1,14 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   z_parsing.c                                        :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
+/*   By: macoulib <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/18 21:44:26 by macoulib          #+#    #+#             */
-/*   Updated: 2025/11/20 22:30:48 by macoulib         ###   ########.fr       */
+/*   Created: 2025/04/24 20:09:28 by macoulib          #+#    #+#             */
+/*   Updated: 2025/04/24 20:15:04 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
-
-#include "../../includes/cub3d.h"
+int	ft_isprint(int character)
+{
+	if (character >= 32 && character < 127)
+		return (1);
+	return (0);
+}

@@ -1,14 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   z_parsing.c                                        :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
+/*   By: macoulib <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/18 21:44:26 by macoulib          #+#    #+#             */
-/*   Updated: 2025/11/20 22:30:48 by macoulib         ###   ########.fr       */
+/*   Created: 2025/05/02 03:00:24 by macoulib          #+#    #+#             */
+/*   Updated: 2025/05/02 03:02:37 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
+void	ft_putstr_fd(char *s, int fd)
+{
+	size_t	slen;
 
-#include "../../includes/cub3d.h"
+	if (!s)
+		return ;
+	slen = ft_strlen(s);
+	write(fd, s, slen);
+}

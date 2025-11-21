@@ -1,14 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   z_parsing.c                                        :+:      :+:    :+:   */
+/*   ft_lstadd_front_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/18 21:44:26 by macoulib          #+#    #+#             */
-/*   Updated: 2025/11/20 22:30:48 by macoulib         ###   ########.fr       */
+/*   Created: 2025/05/04 15:18:17 by macoulib          #+#    #+#             */
+/*   Updated: 2025/05/14 15:25:16 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 
-#include "../../includes/cub3d.h"
+void	ft_lstadd_front(t_list **lst, t_list *new)
+{
+	new ->next = *lst;
+	*lst = new;
+}
