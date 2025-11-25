@@ -6,7 +6,7 @@
 #    By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/18 21:42:46 by macoulib          #+#    #+#              #
-#    Updated: 2025/11/21 19:44:56 by macoulib         ###   ########.fr        #
+#    Updated: 2025/11/25 18:36:29 by macoulib         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,9 +27,12 @@ OBJ_DIR     = obj
 
 SRCS = \
 	src/parsing/parsing_utils.c \
+	src/parsing/z_parsing.c \
 	src/parsing/get_next_line.c \
 	src/parsing/stock_map.c \
+	src/parsing/init_map.c \
 	src/parsing/verif_map.c \
+	src/parsing/verif_argv.c \
 	src/cub3D.c 
 
 OBJS = $(SRCS:src/%.c=$(OBJ_DIR)/%.o)
