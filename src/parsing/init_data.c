@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   z_parsing.c                                        :+:      :+:    :+:   */
+/*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/18 21:44:26 by macoulib          #+#    #+#             */
-/*   Updated: 2025/11/26 18:21:22 by macoulib         ###   ########.fr       */
+/*   Created: 2025/11/26 14:24:39 by macoulib          #+#    #+#             */
+/*   Updated: 2025/11/26 15:20:16 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	parsing(t_data *data, t_map *map)
+int	init_data(t_data *data, t_map *map)
 {
-	if (check_map_rectangular(data))
-		return (0);
-	if (check_map_outline(data))
-		return (0);
-	if (verif_map_element(data))
-		return (0);
-	position_player(map, data);
-	if (!initialize_mlx(map))
-		return (0);
-	if (!verif_load_xpm(data, map))
-		return (0);
+	data = ft_calloc(1, sizeof(t_data));
+	map = ft_calloc(1, sizeof(t_map));
+	if (!data || !map)
+		return (printf("alloc data, map error  \n"), 0);
 	return (1);
 }

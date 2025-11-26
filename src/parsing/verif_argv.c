@@ -6,30 +6,16 @@
 /*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 15:39:39 by macoulib          #+#    #+#             */
-/*   Updated: 2025/11/25 18:33:29 by macoulib         ###   ########.fr       */
+/*   Updated: 2025/11/26 15:21:13 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	ft_strcmp(char *s1, char *s2)
-{
-	int	i;
-
-	i = 0;
-	while (s1[i] || s2[i])
-	{
-		if (s1[i] != s2[i])
-			return (s1[i] - s2[i]);
-		i++;
-	}
-	return (0);
-}
 int	validate_args(int argc, char **argv)
 {
 	char *arg;
 	int len;
-	(void)argc;
 
 	if (argc != 2)
 		return (printf("❌ Error : Invalid arguments .\n"), 0);
