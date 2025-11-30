@@ -6,7 +6,7 @@
 /*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 14:03:32 by macoulib          #+#    #+#             */
-/*   Updated: 2025/11/30 18:27:16 by macoulib         ###   ########.fr       */
+/*   Updated: 2025/11/30 19:12:08 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ int	verif_load_xpm(t_data *data, t_map *map)
 
 	if (!has_xpm_extension(data))
 		return (printf("xpm paths error \n"), 0);
-
 	if (!load_xpm(map, data))
 		return (printf(" xpm load error \n"), 0);
 	return (1);

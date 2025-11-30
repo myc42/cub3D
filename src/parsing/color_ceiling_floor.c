@@ -6,7 +6,7 @@
 /*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 16:11:32 by macoulib          #+#    #+#             */
-/*   Updated: 2025/11/30 18:31:39 by macoulib         ###   ########.fr       */
+/*   Updated: 2025/11/30 19:26:27 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	parse_color_line(char *line, int *color)
 	int		b;
 
 	if (!is_valid_color_line(line))
-		return (printf("Invalid color format"), 0);
+		return (printf("Invalid color format \n"), 0);
 	split_space = ft_split(line, ' ');
 	if (!split_space || !split_space[0] || !split_space[1])
 	{
@@ -98,14 +98,16 @@ int	color_ceiling_floor(t_data *data)
 		if (data->map_header[i][0] == 'F')
 		{
 			if (!parse_color_line(data->map_header[i], &data->color_floor))
-				return (printf("Invalid floor color format"), 0);
+				return (printf("Invalid floor color format \n"), 0);
 		}
 		if (data->map_header[i][0] == 'C')
 		{
 			if (!parse_color_line(data->map_header[i], &data->color_cielling))
-				return (printf("Invalid cielling color format"), 0);
+				return (printf("Invalid cielling color format \n"), 0);
 		}
 		i++;
 	}
+	if(!data->color_floor ||  !data->color_cielling)
+		return (printf("floor or cielling collor manquant \n"), 0);
 	return (1);
 }

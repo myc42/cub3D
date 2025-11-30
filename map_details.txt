@@ -1,0 +1,15 @@
+Vérification des arguments : Tout d’abord, j’ai vérifié la validité des arguments fournis.
+
+Récupération et traitement de la map : J’ai récupéré les deux parties de la map, puis je l’ai divisée en deux blocs : les headers et le bloc de map. Pour les headers, j’ai supprimé tous les espaces et les sauts de ligne.
+
+Vérification de la map : J’ai vérifié que la map respecte toutes les conditions nécessaires pour être correcte. Dans la fonction de vérification, une fois que tout est validé, je passe à l’étape suivante.
+
+Initialisation de la MLX : Avant de continuer, j’initialise la bibliothèque graphique MLX.
+
+Chargement des textures : Je vérifie et télécharge les fichiers XPM nécessaires.
+
+Gestion des couleurs : Je définis la couleur du sol et du ciel.
+
+Position du joueur : Je détermine la position initiale du joueur.
+
+Ouverture de la fenêtre : Enfin, si tout est correct, j’ouvre la fenêtre graphique.

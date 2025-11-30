@@ -20,17 +20,16 @@ SRCS = \
 	src/parsing/parsing_utils.c \
 	src/parsing/texture_parsing.c \
 	src/parsing/z_parsing.c \
-	src/parsing/init_data.c \
 	src/parsing/verif_load_xpm.c \
 	src/parsing/get_next_line.c \
 	src/parsing/color_ceiling_floor.c\
 	src/parsing/stock_map.c \
 	src/parsing/player_position.c \
 	src/parsing/mlx_management.c \
-	src/parsing/init_map.c \
 	src/parsing/get_map_file.c \
 	src/parsing/verif_map.c \
 	src/parsing/verif_argv.c \
+	src/parsing/init_map.c \
 	src/cub3D.c 
 
 OBJS = $(SRCS:src/%.c=$(OBJ_DIR)/%.o)

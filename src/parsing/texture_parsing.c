@@ -6,7 +6,7 @@
 /*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:27:04 by macoulib          #+#    #+#             */
-/*   Updated: 2025/11/29 15:49:05 by macoulib         ###   ########.fr       */
+/*   Updated: 2025/11/30 19:12:37 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	stock_texture_path(t_data *data, int i)
 	line = data->map_header[i];
 	j = 2;
 	if (!texture_exists(data, i))
-		return (printf("chemin xpm incorrect \n"), 0);
+		return (printf("texture incomplete  \n"), 0);
 	while (line[j] && ft_isspace((unsigned char)line[j]))
 		j++;
 	path = trim_end_spaces(line + j);

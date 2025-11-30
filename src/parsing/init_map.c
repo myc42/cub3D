@@ -6,7 +6,7 @@
 /*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 15:16:21 by macoulib          #+#    #+#             */
-/*   Updated: 2025/11/30 17:54:01 by macoulib         ###   ########.fr       */
+/*   Updated: 2025/11/30 21:14:14 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,15 +78,35 @@ int	init_map(t_data *data)
 	data->map_height = j;
 	return (1);
 }
+int	check_duplicates(t_data *data)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (data->map_header[i])
+	{
+		j = i + 1;
+		while (data->map_header[j])
+		{
+			if (ft_strcmp(data->map_header[j], data->map_header[i]) == 0)
+				return (1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
 
 int	map_management(t_data *data, char *av)
 {
 	get_map(data, av);
-
 	if (!find_map_start(data))
 		return (printf("pas de map "), 0);
 	if (!init_map_header(data))
-		return (printf("map na pas de header"), 0);
+		return (printf("probleme sur header de la map "), 0);
+	if (check_duplicates(data))
+		return (printf("duplicata dans le header "), 0);
 	if (!init_map(data))
 		return (printf("votre map nexiste pas "), 0);
 	return (1);
