@@ -6,7 +6,7 @@
 /*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 21:44:29 by macoulib          #+#    #+#             */
-/*   Updated: 2025/11/26 17:39:48 by macoulib         ###   ########.fr       */
+/*   Updated: 2025/11/29 14:35:40 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_strcmp(char *s1, char *s2)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s1[i] || s2[i])
@@ -26,7 +26,6 @@ int	ft_strcmp(char *s1, char *s2)
 	return (0);
 }
 
-
 int	ft_isspace(char c)
 {
 	if (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f'
@@ -35,4 +34,18 @@ int	ft_isspace(char c)
 		return (1);
 	}
 	return (0);
+}
+
+int	is_line_empty( char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (!ft_isspace(line[i]))
+			return (0);
+		i++;
+	}
+	return (1);
 }

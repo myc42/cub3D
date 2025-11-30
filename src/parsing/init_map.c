@@ -5,65 +5,89 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/21 19:49:19 by macoulib          #+#    #+#             */
-/*   Updated: 2025/11/25 18:44:58 by macoulib         ###   ########.fr       */
+/*   Created: 2025/11/29 15:16:21 by macoulib          #+#    #+#             */
+/*   Updated: 2025/11/30 17:54:01 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	echecouverturedufichier(t_data *data)
+int	init_map_header(t_data *data)
 {
-	printf("❌ echec d'ouverture du fichier \n");
-	free(data);
-	exit(0);
-}
+	int	i;
+	int	j;
 
-char	*freestats(char *staticbuffer, char *buffer, t_data *data, int fd)
-{
-	char	*temp;
-
-	if (ft_strlen(buffer) <= 1)
+	i = 0;
+	j = 0;
+	if (!data->map_file_content || data->map_start <= 0)
+		return (0);
+	while (i < data->map_start)
 	{
-		free(data);
-		free(staticbuffer);
-		free(buffer);
-		temp = get_next_line(-1);
-		if (fd > 2)
-			close(fd);
-		write(2, "Error\n❌ Empty line detected in map.\n", 37);
-		exit(0);
+		if (!is_line_empty(data->map_file_content[i]))
+			j++;
+		i++;
 	}
-	temp = ft_strjoin(staticbuffer, buffer);
-	free(staticbuffer);
-	return (temp);
-}
-
-void	get_map(t_data *data, char *av)
-{
-	int fd;
-	char *linestock;
-	char *line;
-
-	fd = open(av, O_RDONLY);
-	if (fd == -1)
-		echecouverturedufichier(data);
-	linestock = ft_strdup("");
-	while (1)
+	data->map_header = malloc(sizeof(char *) * (j + 1));
+	if (!data->map_header)
+		return (0);
+	i = 0;
+	j = 0;
+	while (i < data->map_start)
 	{
-		line = get_next_line(fd);
-		if (!line)
-			break ;
-		linestock = freestats(linestock, line, data, fd);
-		if (!linestock)
+		if (!is_line_empty(data->map_file_content[i]))
 		{
-			free(line);
-			break ;
+			data->map_header[j] = ft_strdup(data->map_file_content[i]);
+			if (!data->map_header[j])
+				return (0);
+			j++;
 		}
-		data->map_rows++;
-		free(line);
+		i++;
 	}
-	close(fd);
-	data->map = ft_split(linestock, '\n');
-	free(linestock);
+	data->map_header[j] = NULL;
+	return (1);
+}
+
+int	init_map(t_data *data)
+{
+	int	i;
+	int	j;
+	int	map_lines;
+
+	i = data->map_start;
+	j = 0;
+	map_lines = 0;
+	while (data->map_file_content[i])
+	{
+		map_lines++;
+		i++;
+	}
+	data->map = malloc(sizeof(char *) * (map_lines + 1));
+	if (!data->map)
+		return (0);
+	i = data->map_start;
+	j = 0;
+	while (data->map_file_content[i])
+	{
+		data->map[j] = ft_strdup(data->map_file_content[i]);
+		if (!data->map[j])
+			return (0);
+		i++;
+		j++;
+	}
+	data->map[j] = NULL;
+	data->map_height = j;
+	return (1);
+}
+
+int	map_management(t_data *data, char *av)
+{
+	get_map(data, av);
+
+	if (!find_map_start(data))
+		return (printf("pas de map "), 0);
+	if (!init_map_header(data))
+		return (printf("map na pas de header"), 0);
+	if (!init_map(data))
+		return (printf("votre map nexiste pas "), 0);
+	return (1);
 }

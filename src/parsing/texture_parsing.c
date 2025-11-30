@@ -6,7 +6,7 @@
 /*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:27:04 by macoulib          #+#    #+#             */
-/*   Updated: 2025/11/26 17:47:10 by macoulib         ###   ########.fr       */
+/*   Updated: 2025/11/29 15:49:05 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	texture_exists(t_data *data, int i)
 {
-	if (!ft_strncmp(data->map[i], "NO ", 3) || !ft_strncmp(data->map[i], "SO ",
-			3) || !ft_strncmp(data->map[i], "WE ", 3)
-		|| !ft_strncmp(data->map[i], "EA ", 3))
+	if (!ft_strncmp(data->map_header[i], "NO ", 3) || !ft_strncmp(data->map_header[i], "SO ",
+			3) || !ft_strncmp(data->map_header[i], "WE ", 3)
+		|| !ft_strncmp(data->map_header[i], "EA ", 3))
 		return (1);
 	return (0);
 }
@@ -38,7 +38,7 @@ int	stock_texture_path(t_data *data, int i)
 	int		j;
 	char	*path;
 
-	line = data->map[i];
+	line = data->map_header[i];
 	j = 2;
 	if (!texture_exists(data, i))
 		return (printf("chemin xpm incorrect \n"), 0);

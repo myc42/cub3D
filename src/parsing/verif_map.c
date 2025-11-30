@@ -6,7 +6,7 @@
 /*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 21:50:30 by macoulib          #+#    #+#             */
-/*   Updated: 2025/11/21 18:09:46 by macoulib         ###   ########.fr       */
+/*   Updated: 2025/11/30 18:17:01 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,50 +18,58 @@ int	check_map_rectangular(t_data *data)
 	size_t	len;
 	size_t	first_len;
 
-	first_len = ft_strlen(data->map[data->index_start]);
+	if (!data->map || !data->map[0])
+		return (ft_putstr_fd("Error : Empty map\n", 2), 0);
+	first_len = ft_strlen(data->map[0]);
 	if (first_len == 0)
 		return (ft_putstr_fd("Error : Empty map line\n", 2), 1);
-	i = data->index_start;
-	while (i <= data->index_end)
+	i = 0;
+	while (data->map[i])
 	{
 		len = ft_strlen(data->map[i]);
 		if (len != first_len)
-			return (ft_putstr_fd("Error : Map must be rectangular\n", 2), 1);
+			return (ft_putstr_fd("Error : Map must be rectangular\n", 2), 0);
 		i++;
 	}
-	return (0);
+	return (1);
 }
-
 int	check_map_outline(t_data *data)
 {
 	int		i;
 	char	*line;
+	int		last_index;
 
-	line = data->map[data->index_start];
+	if (!data->map || data->map_height <= 0)
+		return (ft_putstr_fd("Error : Empty map\n", 2), 0);
+	last_index = data->map_height - 1;
+	line = data->map[0];
 	i = 0;
 	while (line[i])
 	{
 		if (line[i] != '1')
-			return (ft_putstr_fd("Error : First map line  '1'\n", 2), 1);
+			return (ft_putstr_fd("Error : First map line must be all '1'\n", 2),
+				0);
 		i++;
 	}
-	i = 0;
-	line = data->map[data->index_end];
+	line = data->map[last_index];
 	i = 0;
 	while (line[i])
 	{
 		if (line[i] != '1')
-			return (ft_putstr_fd("Error : First map line  '1'\n", 2), 1);
+			return (ft_putstr_fd("Error : Last map line must be all '1'\n", 2),
+				10);
 		i++;
 	}
-	while (i < data->index_end)
+	i = 1;
+	while (i < last_index)
 	{
 		line = data->map[i];
 		if (line[0] != '1' || line[ft_strlen(line) - 1] != '1')
-			return (ft_putstr_fd("Error : Map must be enclosed '1'\n", 2), 1);
+			return (ft_putstr_fd("Error : Map must be enclosed by '1'\n", 2),
+				0);
 		i++;
 	}
-	return (0);
+	return (1);
 }
 
 int	verif_map_element(t_data *data)
@@ -95,4 +103,16 @@ int	verif_map_element(t_data *data)
 	if (invalid)
 		return (printf("Erreur: caractère invalide dans la map.\n"), 1);
 	return (0);
+}
+
+int	verif_map(t_data *data)
+{
+	if (!check_map_rectangular(data))
+		return (0);
+	if (!check_map_outline(data))
+		return (0);
+	if (verif_map_element(data))
+		return (0);
+
+	return (1);
 }

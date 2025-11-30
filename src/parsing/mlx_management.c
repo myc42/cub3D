@@ -6,7 +6,7 @@
 /*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 20:05:05 by macoulib          #+#    #+#             */
-/*   Updated: 2025/11/26 15:19:28 by macoulib         ###   ########.fr       */
+/*   Updated: 2025/11/30 17:00:55 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 
 int	initialize_mlx(t_map *map)
 {
-	// 1. Initialisation de la connexion MLX
 	map->mlx = mlx_init();
 	if (!map->mlx)
-	return (printf("mlx init error \n"), 0);
+		return (printf("mlx init error \n"), 0);
 	// 2. Configuration du Buffer 0
 	map->buffer[0].img = mlx_new_image(map->mlx, 480, 480);
 	map->buffer[0].address = mlx_get_data_addr(map->buffer[0].img,

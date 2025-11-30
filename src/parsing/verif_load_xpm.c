@@ -6,7 +6,7 @@
 /*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 14:03:32 by macoulib          #+#    #+#             */
-/*   Updated: 2025/11/26 18:18:36 by macoulib         ###   ########.fr       */
+/*   Updated: 2025/11/30 18:27:16 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ int	load_xpm(t_map *map, t_data *data)
 			&map->wall_west, &map->wall_east};
 
 	i = 0;
-	while (i < 4)
+	if (!map || !map->mlx)
+		return (printf("Error: mlx not initialized\n"), 0);
+	while (i < 3)
 	{
 		buffers[i]->img = mlx_xpm_file_to_image(map->mlx, paths[i],
 				&buffers[i]->width, &buffers[i]->height);
@@ -69,10 +71,11 @@ int	verif_load_xpm(t_data *data, t_map *map)
 			return (0);
 		i++;
 	}
+
 	if (!has_xpm_extension(data))
 		return (printf("xpm paths error \n"), 0);
+
 	if (!load_xpm(map, data))
 		return (printf(" xpm load error \n"), 0);
-
 	return (1);
 }

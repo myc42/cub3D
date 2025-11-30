@@ -1,0 +1,106 @@
+arfait ! Maintenant que tu as :
+
+Récupéré et nettoyé le contenu du fichier .cub
+
+Stocké proprement le header (textures et couleurs)
+
+Vérifié et chargé les textures XPM dans MLX
+
+Validé la map (rectangulaire, bordures, éléments, joueur unique)
+
+…la prochaine étape logique dans ton projet cub3d serait de gérer les couleurs du sol et du plafond et l’initialisation de la structure map pour le moteur 3D.
+
+1️⃣ Gérer les couleurs F et C
+
+Ton header contient maintenant les lignes F 220,100,0 et C 225,30,0.
+
+Il faut parser ces lignes pour stocker les couleurs en format RGB ou entier (par exemple int color = (R << 16) | (G << 8) | B;).
+
+int stock_colors(t_data *data)
+{
+    char *line;
+    int r, g, b;
+
+    // Sol (F)
+    line = data->map_header[4];
+    if (sscanf(line, "F %d,%d,%d", &r, &g, &b) != 3)
+        return printf("Erreur : format couleur sol incorrect\n"), 0;
+    data->floor_color = (r << 16) | (g << 8) | b;
+
+    // Plafond (C)
+    line = data->map_header[5];
+    if (sscanf(line, "C %d,%d,%d", &r, &g, &b) != 3)
+        return printf("Erreur : format couleur plafond incorrect\n"), 0;
+    data->ceiling_color = (r << 16) | (g << 8) | b;
+
+    return 1;
+}
+
+
+✅ Ensuite tu pourras utiliser data->floor_color et data->ceiling_color dans ton moteur de rendu.
+
+2️⃣ Initialiser la structure de la map pour le moteur 3D
+
+Ta data->map contient déjà la map rectangulaire, entourée de 1.
+
+Il faut maintenant trouver la position du joueur et son orientation (N, S, E, W).
+
+Stocker cette position dans player_x, player_y, et l’angle de départ.
+
+void init_player(t_data *data)
+{
+    int i, j;
+
+    for (i = 0; i < data->map_height; i++)
+    {
+        for (j = 0; data->map[i][j]; j++)
+        {
+            if (ft_strchr("NSEW", data->map[i][j]))
+            {
+                data->player_x = j + 0.5; // au centre de la case
+                data->player_y = i + 0.5;
+
+                if (data->map[i][j] == 'N')
+                    data->player_angle = 270;
+                else if (data->map[i][j] == 'S')
+                    data->player_angle = 90;
+                else if (data->map[i][j] == 'E')
+                    data->player_angle = 0;
+                else if (data->map[i][j] == 'W')
+                    data->player_angle = 180;
+
+                return;
+            }
+        }
+    }
+}
+
+3️⃣ Préparer le moteur de rendu
+
+Initialiser la fenêtre MLX.
+
+Préparer la minimap ou les structures pour le raycasting.
+
+Associer les textures chargées aux murs correspondants.
+
+💡 Résumé des prochaines étapes :
+
+Parser et stocker les couleurs F et C
+
+Trouver et stocker la position et orientation du joueur
+
+Préparer la structure de la map pour le moteur 3D
+
+Commencer à rendre la map avec le raycasting
+
+Si tu veux, je peux te rédiger une fonction complète init_header_and_player qui fait :
+
+Parsing textures (déjà fait)
+
+Parsing couleurs F et C
+
+Trouver le joueur et orientation
+
+…tout en une seule étape avant le rendu.
+
+Veux‑tu que je fasse ça ?

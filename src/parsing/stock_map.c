@@ -6,7 +6,7 @@
 /*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 18:08:42 by macoulib          #+#    #+#             */
-/*   Updated: 2025/11/21 19:54:05 by macoulib         ###   ########.fr       */
+/*   Updated: 2025/11/30 16:47:13 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	free_tab(char **tab)
 	free(tab);
 }
 
-void	stock_map_infos(char *file, t_data *data)
+int	stock_map_infos(char *file, t_data *data)
 {
 	int		fd;
 	char	*line;
@@ -35,14 +35,14 @@ void	stock_map_infos(char *file, t_data *data)
 	if (fd < 0)
 	{
 		write(2, "open map Error\n", 15);
-		return ;
+		return (0);
 	}
 	data->map = malloc(sizeof(char *) * MAX_MAP_LINES);
 	if (!data->map)
 	{
 		write(2, "alloc Error\n", 12);
 		close(fd);
-		return ;
+		return (0);
 	}
 	line = get_next_line(fd);
 	while (line)
@@ -52,9 +52,10 @@ void	stock_map_infos(char *file, t_data *data)
 		if (!trim)
 		{
 			write(2, "trim Error\n", 11);
+			data->map[data->map_rows] = NULL;
 			free_tab(data->map);
 			close(fd);
-			return ;
+			return (0);
 		}
 		data->map[data->map_rows] = trim;
 		data->map_rows++;
@@ -63,10 +64,11 @@ void	stock_map_infos(char *file, t_data *data)
 			write(2, "Error: map too big\n", 20);
 			free_tab(data->map);
 			close(fd);
-			return ;
+			return (0);
 		}
 		line = get_next_line(fd);
 	}
 	close(fd);
 	data->map[data->map_rows] = NULL;
+	return (1);
 }

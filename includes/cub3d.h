@@ -6,7 +6,7 @@
 /*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 21:46:36 by macoulib          #+#    #+#             */
-/*   Updated: 2025/11/26 17:39:52 by macoulib         ###   ########.fr       */
+/*   Updated: 2025/11/30 17:21:53 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,10 @@ typedef struct s_img_buffer
 
 typedef struct s_data
 {
+	char			**map_file_content;
 	char			**map;
-	int				index_start;
+	char			**map_header;
+	int				map_start;
 	int				index_end;
 	int				map_height;
 	int				map_rows;
@@ -48,6 +50,8 @@ typedef struct s_data
 	char			*wall_north;
 	char			*wall_south;
 	char			*wall_east;
+	int				color_floor;
+	int				color_cielling;
 }					t_data;
 
 typedef struct s_map
@@ -68,9 +72,8 @@ typedef struct s_map
 
 }					t_map;
 
-int					init_data(t_data *data, t_map *map);
-int					parsing(t_data *data, t_map *map);
-void				stock_map_infos(char *file, t_data *data);
+int					parsing(t_data *data, t_map *map, char *av);
+int					stock_map_infos(char *file, t_data *data);
 int					check_map_rectangular(t_data *data);
 int					check_map_outline(t_data *data);
 int					verif_map_element(t_data *data);
@@ -88,5 +91,11 @@ char				*trim_end_spaces(char *str);
 int					texture_exists(t_data *data, int i);
 int					stock_texture_path(t_data *data, int i);
 int					ft_isspace(char c);
+int					is_line_empty(char *line);
+void				free_tab(char **tab);
+int					find_map_start(t_data *data);
+int					verif_map(t_data *data);
+int					color_ceiling_floor(t_data *data);
+int					map_management(t_data *data, char *av);
 
 #endif
