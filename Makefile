@@ -8,7 +8,7 @@ LIBFT_DIR   = librairie/
 LIBFT       = $(LIBFT_DIR)/libft.a
 
 LDFLAGS     = -L$(LIBFT_DIR)
-LDLIBS      = -lft -lreadline -lncurses -ltinfo
+LDLIBS      = -lft
 
 # === MLX ===
 MLX_DIR     = minilibx-linux
@@ -30,7 +30,13 @@ SRCS = \
 	src/parsing/verif_map.c \
 	src/parsing/verif_argv.c \
 	src/parsing/init_map.c \
-	src/cub3D.c 
+	src/cub3D.c \
+	src/game_loop.c \
+	src/controls.c \
+	src/render_frame.c \
+	src/cleanup.c \
+	src/rotation.c \
+	src/minimap.c
 
 OBJS = $(SRCS:src/%.c=$(OBJ_DIR)/%.o)
 

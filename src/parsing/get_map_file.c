@@ -6,7 +6,7 @@
 /*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 19:49:19 by macoulib          #+#    #+#             */
-/*   Updated: 2025/11/30 17:51:24 by macoulib         ###   ########.fr       */
+/*   Updated: 2025/12/28 20:39:06 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ int	find_map_start(t_data *data)
 
 	if (!data->map_file_content)
 		return (0);
-
 	i = 0;
 	while (data->map_file_content[i])
 	{

@@ -19,23 +19,23 @@ void	position_player(t_map *map, t_data *data)
 	char	c;
 
 	y = 0;
-	while (y < data->map_rows)
+	while (y < data->map_height)
 	{
 		x = 0;
-		while (x < data->map[y][x])
+		while (data->map[y][x])
 		{
 			c = data->map[y][x];
 			if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 			{
-				map->px = x;
-				map->py = y;
+				map->px = x + 0.5f;
+				map->py = y + 0.5f;
 				if (c == 'N')
 					map->angle = 270;
-				if (c == 'S')
+				else if (c == 'S')
 					map->angle = 90;
-				if (c == 'E')
+				else if (c == 'E')
 					map->angle = 0;
-				if (c == 'W')
+				else if (c == 'W')
 					map->angle = 180;
 				data->map[y][x] = '0';
 				return ;
@@ -45,3 +45,4 @@ void	position_player(t_map *map, t_data *data)
 		y++;
 	}
 }
+
