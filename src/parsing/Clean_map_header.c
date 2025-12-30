@@ -6,7 +6,7 @@
 /*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 01:47:52 by macoulib          #+#    #+#             */
-/*   Updated: 2025/12/30 02:08:52 by macoulib         ###   ########.fr       */
+/*   Updated: 2025/12/30 20:52:08 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,16 @@
 
 char *trim_start_spaces(char *str)
 {
-    int i = 0;
-
-    while (str[i] && ft_isspace((unsigned char)str[i]))
-        i++;
-
-    return (ft_strdup(str + i));
+    int start = 0;
+    int end = ft_strlen(str) - 1;
+    while (str[start] && ft_isspace((unsigned char)str[start]))
+        start++;
+    while (end >= start && ft_isspace((unsigned char)str[end]))
+        end--;
+    char *trimmed_str = ft_substr(str, start, end - start + 1);
+    return trimmed_str;
 }
+
 
 int clean_map_file_content(t_data *data)
 {
@@ -88,3 +91,31 @@ int reorder_map_header(t_data *data)
     return (1);
 }
 
+#include <stdlib.h>
+
+int	check_map_size(char **map)
+{
+	int	i;
+	int	height;
+	int	width;
+
+	if (!map)
+		return (0);
+	height = 0;
+	while (map[height])
+		height++;
+	if (height < 3)
+		return (0);
+
+	i = 0;
+	while (map[i])
+	{
+		width = 0;
+		while (map[i][width])
+			width++;
+		if (width < 3)
+			return (0);
+		i++;
+	}
+	return (1);
+}

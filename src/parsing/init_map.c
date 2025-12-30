@@ -6,7 +6,7 @@
 /*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 15:16:21 by macoulib          #+#    #+#             */
-/*   Updated: 2025/12/30 02:06:00 by macoulib         ###   ########.fr       */
+/*   Updated: 2025/12/30 20:54:35 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ int	init_map(t_data *data)
 	}
 	data->map[j] = NULL;
 	data->map_height = j;
+	if (!check_map_size(data->map))
+		return (printf("map trop petite \n"),0);
 	return (1);
 }
 
@@ -161,6 +163,7 @@ int	map_management(t_data *data, char *av)
 	data->color_cielling = -1;
 
 	get_map(data, av);
+
 	if (!find_map_start(data))
 		return (printf("pas de map "), 0);
 	if (!init_map_header(data))
@@ -168,6 +171,6 @@ int	map_management(t_data *data, char *av)
 	if (check_duplicates(data))
 		return (printf("duplicata dans le header "), 0);
 	if (!init_map(data))
-		return (printf("votre map nexiste pas "), 0);
+		return (printf("erreur dans la map"), 0);
 	return (1);
 }

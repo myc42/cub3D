@@ -6,7 +6,7 @@
 /*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 21:43:28 by macoulib          #+#    #+#             */
-/*   Updated: 2025/11/30 19:09:45 by macoulib         ###   ########.fr       */
+/*   Updated: 2025/12/30 20:56:41 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	main(int ac, char **av)
 	if (!validate_args(ac, av))
 		return (exit_error(map, "bad arguments"));
 	if (!parsing(data, map, av[1]))
-		return (exit_error(map, "parsing failed"));
+		return (exit_error(map, ""));
 	if (!init_window_and_hooks(map))
 		return (1);
 	mlx_loop(map->mlx);

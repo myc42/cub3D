@@ -6,7 +6,7 @@
 /*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 21:50:30 by macoulib          #+#    #+#             */
-/*   Updated: 2025/12/28 17:19:23 by macoulib         ###   ########.fr       */
+/*   Updated: 2025/12/30 19:23:52 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,7 @@ int	check_map_outline(t_data *data)
 	while (i < last_index)
 	{
 		line = data->map[i];
-		if ((line[0] != '1' && line[i] != ' ' ) && (line[ft_strlen(line) - 1] != '1'
-			&& line[ft_strlen(line) - 1] != '1' ))
+		if ((line[0] != '1'  ) || (line[ft_strlen(line) - 1] != '1' ))
 			return (ft_putstr_fd("Error : Map must be enclosed by '1'\n", 2),
 				0);
 		i++;
