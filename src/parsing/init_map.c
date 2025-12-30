@@ -6,7 +6,7 @@
 /*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 15:16:21 by macoulib          #+#    #+#             */
-/*   Updated: 2025/11/30 21:14:14 by macoulib         ###   ########.fr       */
+/*   Updated: 2025/12/30 02:06:00 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	init_map_header(t_data *data)
 
 	i = 0;
 	j = 0;
+	clean_map_file_content(data);
 	if (!data->map_file_content || data->map_start <= 0)
 		return (0);
 	while (i < data->map_start)
@@ -63,6 +64,7 @@ int	init_map_header(t_data *data)
 		i++;
 	}
 	data->map_header[j] = NULL;
+	reorder_map_header(data);
 	return (1);
 }
 

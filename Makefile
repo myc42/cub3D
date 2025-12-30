@@ -36,6 +36,7 @@ SRCS = \
 	src/render_frame.c \
 	src/cleanup.c \
 	src/rotation.c \
+	src/parsing/Clean_map_header.c \
 	src/minimap.c
 
 OBJS = $(SRCS:src/%.c=$(OBJ_DIR)/%.o)

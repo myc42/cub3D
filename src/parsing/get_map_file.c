@@ -6,7 +6,7 @@
 /*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 19:49:19 by macoulib          #+#    #+#             */
-/*   Updated: 2025/12/28 20:39:06 by macoulib         ###   ########.fr       */
+/*   Updated: 2025/12/30 01:33:24 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,13 @@ int	find_map_start(t_data *data)
 	while (data->map_file_content[i])
 	{
 		chartrim = ft_strtrim(data->map_file_content[i], " \t\n");
+		
 		if (!chartrim)
 			return (0);
 
 		if (*chartrim && is_map_line(chartrim))
 		{
+			
 			free(chartrim);
 			data->map_start = i;
 			return (1);

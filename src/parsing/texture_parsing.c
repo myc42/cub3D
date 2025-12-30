@@ -6,7 +6,7 @@
 /*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:27:04 by macoulib          #+#    #+#             */
-/*   Updated: 2025/11/30 19:12:37 by macoulib         ###   ########.fr       */
+/*   Updated: 2025/12/30 02:01:54 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 int	texture_exists(t_data *data, int i)
 {
+	
 	if (!ft_strncmp(data->map_header[i], "NO ", 3) || !ft_strncmp(data->map_header[i], "SO ",
 			3) || !ft_strncmp(data->map_header[i], "WE ", 3)
 		|| !ft_strncmp(data->map_header[i], "EA ", 3))
 		return (1);
+	
 	return (0);
 }
 
@@ -57,3 +59,4 @@ int	stock_texture_path(t_data *data, int i)
 		data->wall_east = path;
 	return (1);
 }
+
