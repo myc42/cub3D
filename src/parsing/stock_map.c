@@ -6,7 +6,7 @@
 /*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 18:08:42 by macoulib          #+#    #+#             */
-/*   Updated: 2025/11/30 16:47:13 by macoulib         ###   ########.fr       */
+/*   Updated: 2026/01/03 18:00:21 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,12 @@ int	stock_map_infos(char *file, t_data *data)
 	data->map_rows = 0;
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-	{
-		write(2, "open map Error\n", 15);
-		return (0);
-	}
+	
+		return (write(2, "open map Error\n", 15),0);
+	
 	data->map = malloc(sizeof(char *) * MAX_MAP_LINES);
-	if (!data->map)
-	{
-		write(2, "alloc Error\n", 12);
-		close(fd);
-		return (0);
-	}
+	if (!data->map)	
+		return (write(2, "alloc Error\n", 12),close(fd), 0);
 	line = get_next_line(fd);
 	while (line)
 	{

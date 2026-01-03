@@ -6,7 +6,7 @@
 /*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 21:46:36 by macoulib          #+#    #+#             */
-/*   Updated: 2025/12/30 20:52:38 by macoulib         ###   ########.fr       */
+/*   Updated: 2026/01/03 17:36:20 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,5 +206,6 @@ void				rotate_with_value(t_map *map, double rot);
 int					mouse_move(int x, int y, t_map *map);
 int					clean_map_file_content(t_data *data);
 int					reorder_map_header(t_data *data);
+int					is_closed_map(t_data *data);
 
 #endif

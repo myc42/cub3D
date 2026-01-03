@@ -6,7 +6,7 @@
 /*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 21:44:29 by macoulib          #+#    #+#             */
-/*   Updated: 2025/11/29 14:35:40 by macoulib         ###   ########.fr       */
+/*   Updated: 2026/01/03 17:37:02 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,3 +49,34 @@ int	is_line_empty( char *line)
 	}
 	return (1);
 }
+
+
+int	is_closed_map(t_data *data)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < data->map_height)
+	{
+		x = 0;
+		while (data->map[y][x])
+		{
+			if (data->map[y][x] == '0' && (y == 0 || y == data->map_height - 1))
+				return (0);
+			if (data->map[y][x] == '0')
+			{
+				if (ft_isspace(data->map[y - 1][x - 1]) || ft_isspace(data->map[y - 1][x])
+				|| ft_isspace(data->map[y - 1][x + 1]) || ft_isspace(data->map[y][x - 1])
+				|| ft_isspace(data->map[y][x + 1]) || ft_isspace(data->map[y + 1][x - 1])
+				|| ft_isspace(data->map[y + 1][x])
+				|| ft_isspace(data->map[y + 1][x + 1]))
+					return (0);
+			}
+			x++;
+		}
+		y++;
+	}
+	return (1);
+}
+
