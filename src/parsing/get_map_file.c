@@ -6,7 +6,7 @@
 /*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 19:49:19 by macoulib          #+#    #+#             */
-/*   Updated: 2025/12/30 01:33:24 by macoulib         ###   ########.fr       */
+/*   Updated: 2026/01/03 19:24:29 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ int	is_map_line(char *line)
 	}
 	return (1);
 }
+
+
 int	find_map_start(t_data *data)
 {
 	int i;

@@ -6,7 +6,7 @@
 /*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:58:53 by macoulib          #+#    #+#             */
-/*   Updated: 2025/11/21 19:41:05 by macoulib         ###   ########.fr       */
+/*   Updated: 2026/01/03 19:14:04 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,3 +118,4 @@ char	*get_next_line(int fd)
 	staticbuffer = therest(staticbuffer);
 	return (line);
 }
+

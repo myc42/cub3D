@@ -1,19 +1,16 @@
 #include "../includes/cub3d.h"
 
+
 int	mouse_move(int x, int y, t_map *map)
 {
-	int		dx;
-	double	rot;
+	int dx;
+	double rot;
 
 	(void)y;
 	if (!map)
 		return (0);
 	if (map->mouse_warp)
-	{
-		map->mouse_warp = 0;
-		return (0);
-	}
-
+		return (map->mouse_warp = 0, 0);
 	if (!map->mouse_init)
 	{
 		map->mouse_init = 1;
@@ -22,7 +19,6 @@ int	mouse_move(int x, int y, t_map *map)
 		mlx_do_sync(map->mlx);
 		return (0);
 	}
-
 	dx = x - (SCREEN_W / 2);
 	if (dx != 0)
 	{
@@ -31,6 +27,5 @@ int	mouse_move(int x, int y, t_map *map)
 	}
 	map->mouse_warp = 1;
 	mlx_mouse_move(map->mlx, map->win, SCREEN_W / 2, SCREEN_H / 2);
-	mlx_do_sync(map->mlx);
-	return (0);
+	return (mlx_do_sync(map->mlx), 0);
 }

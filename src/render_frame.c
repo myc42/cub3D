@@ -3,20 +3,20 @@
 
 void	put_pixel(t_img_buffer *img, int x, int y, int color)
 {
-	char	*dst;
+	char *dst;
 
 	if (!img || !img->address)
 		return ;
 	if (x < 0 || x >= img->width || y < 0 || y >= img->height)
 		return ;
-	dst = img->address + (y * img->line_octet_length)
-		+ (x * (img->Bits_Per_Pixel / 8));
+	dst = img->address + (y * img->line_octet_length) + (x
+			* (img->Bits_Per_Pixel / 8));
 	*(unsigned int *)dst = (unsigned int)color;
 }
 
 unsigned int	get_texel(t_img_buffer *tex, int x, int y)
 {
-	char	*dst;
+	char *dst;
 
 	if (!tex || !tex->address)
 		return (0);
@@ -28,14 +28,14 @@ unsigned int	get_texel(t_img_buffer *tex, int x, int y)
 		x = tex->width - 1;
 	if (y >= tex->height)
 		y = tex->height - 1;
-	dst = tex->address + (y * tex->line_octet_length)
-		+ (x * (tex->Bits_Per_Pixel / 8));
+	dst = tex->address + (y * tex->line_octet_length) + (x
+			* (tex->Bits_Per_Pixel / 8));
 	return (*(unsigned int *)dst);
 }
 
 int	get_map_size(t_map *map, int *h, int *w)
 {
-	int	len;
+	int len;
 
 	if (!map || !map->grid)
 		return (0);
@@ -55,7 +55,7 @@ int	get_map_size(t_map *map, int *h, int *w)
 
 int	is_wall_cell(t_map *map, int map_h, int y, int x)
 {
-	int	len;
+	int len;
 
 	if (y < 0 || y >= map_h || x < 0)
 		return (1);
@@ -98,7 +98,8 @@ void	init_dda(t_map *map, t_ray *r)
 	else
 	{
 		r->step_x = 1;
-		r->side_dist_x = ((double)r->map_x + 1.0 - map->player.x) * r->delta_dist_x;
+		r->side_dist_x = ((double)r->map_x + 1.0 - map->player.x)
+			* r->delta_dist_x;
 	}
 }
 
@@ -112,7 +113,8 @@ void	init_dda_y(t_map *map, t_ray *r)
 	else
 	{
 		r->step_y = 1;
-		r->side_dist_y = ((double)r->map_y + 1.0 - map->player.y) * r->delta_dist_y;
+		r->side_dist_y = ((double)r->map_y + 1.0 - map->player.y)
+			* r->delta_dist_y;
 	}
 }
 
@@ -174,12 +176,13 @@ void	select_texture(t_map *map, t_ray *r)
 
 void	compute_texture_coords(t_map *map, t_ray *r)
 {
-	double	wall_x;
+	double wall_x;
 
 	r->tex_x = 0;
 	r->step = 0.0;
 	r->tex_pos = 0.0;
-	if (!r->tex || r->line_height <= 0 || r->tex->width <= 0 || r->tex->height <= 0)
+	if (!r->tex || r->line_height <= 0 || r->tex->width <= 0
+		|| r->tex->height <= 0)
 		return ;
 	if (r->side == 0)
 		wall_x = map->player.y + r->perp_wall_dist * r->ray_dir_y;
@@ -192,12 +195,13 @@ void	compute_texture_coords(t_map *map, t_ray *r)
 	if (r->side == 1 && r->ray_dir_y > 0)
 		r->tex_x = r->tex->width - r->tex_x - 1;
 	r->step = (double)r->tex->height / (double)r->line_height;
-	r->tex_pos = (r->draw_start - (SCREEN_H / 2) + (r->line_height / 2)) * r->step;
+	r->tex_pos = (r->draw_start - (SCREEN_H / 2) + (r->line_height / 2))
+		* r->step;
 }
 
 void	draw_column(t_map *map, t_img_buffer *buf, t_ray *r, int x)
 {
-	int	y;
+	int y;
 
 	y = 0;
 	while (y < SCREEN_H)
@@ -208,7 +212,8 @@ void	draw_column(t_map *map, t_img_buffer *buf, t_ray *r, int x)
 			put_pixel(buf, x, y, map->floor_color);
 		else if (r->tex && r->tex->address && r->line_height > 0)
 		{
-			put_pixel(buf, x, y, (int)get_texel(r->tex, r->tex_x, (int)r->tex_pos));
+			put_pixel(buf, x, y, (int)get_texel(r->tex, r->tex_x,
+					(int)r->tex_pos));
 			r->tex_pos += r->step;
 		}
 		else
@@ -217,23 +222,27 @@ void	draw_column(t_map *map, t_img_buffer *buf, t_ray *r, int x)
 	}
 }
 
+void	render_fame2(t_img_buffer *buf, t_map *map)
+{
+	draw_minimap(map, buf);
+	mlx_put_image_to_window(map->mlx, map->win, buf->img, 0, 0);
+	map->current = 1 - map->current;
+}
 void	render_frame(t_map *map)
 {
-	t_img_buffer	*buf;
-	t_ray			r;
-	int				map_h;
-	int				map_w;
-	int				x;
+	t_img_buffer *buf;
+	t_ray r;
+	int map_h;
+	int map_w;
+	int x;
 
-	if (!map || !map->grid)
-		return ;
 	buf = &map->buffer[map->current];
-	if (!buf->img || !buf->address)
+	if (!buf->img || !buf->address || !map || !map->grid)
 		return ;
 	if (!get_map_size(map, &map_h, &map_w))
 		return ;
-	x = 0;
-	while (x < SCREEN_W)
+	x = -1;
+	while (x++ < SCREEN_W)
 	{
 		init_ray(map, &r, x);
 		init_dda(map, &r);
@@ -243,9 +252,6 @@ void	render_frame(t_map *map)
 		select_texture(map, &r);
 		compute_texture_coords(map, &r);
 		draw_column(map, buf, &r, x);
-		x++;
 	}
-	draw_minimap(map, buf);
-	mlx_put_image_to_window(map->mlx, map->win, buf->img, 0, 0);
-	map->current = 1 - map->current;
+	render_fame2(buf, map);
 }

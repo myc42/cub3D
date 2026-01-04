@@ -1,4 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cleanup.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+
+	+:+     */
+/*   By: macoulib <macoulib@student.42.fr>          +#+  +:+
+	+#+        */
+/*                                                +#+#+#+#+#+
+	+#+           */
+/*   Created: 2026/01/03 19:01:25 by macoulib          #+#    #+#             */
+/*   Updated: 2026/01/03 19:01:25 by macoulib         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
+
 
 void	destroy_img(void *mlx, t_img_buffer *img)
 {
@@ -20,7 +36,7 @@ void	free_data(t_data *d)
 
 void	cleanup_all(t_map *map)
 {
-	t_data	*d;
+	t_data *d;
 
 	if (!map)
 		return ;

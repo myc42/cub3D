@@ -6,7 +6,7 @@
 /*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 14:03:32 by macoulib          #+#    #+#             */
-/*   Updated: 2025/11/30 19:12:08 by macoulib         ###   ########.fr       */
+/*   Updated: 2026/01/04 15:20:24 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ int	has_xpm_extension(t_data *data)
 	}
 	return (1);
 }
-static void	destroy_loaded_textures(t_map *map, t_img_buffer **buffers, int last)
+static void	destroy_loaded_textures(t_map *map, t_img_buffer **buffers,
+		int last)
 {
 	while (last >= 0)
 	{
@@ -55,37 +56,28 @@ int	load_xpm(t_map *map, t_data *data)
 	char			*paths[4] = {data->wall_north, data->wall_south,
 					data->wall_west, data->wall_east};
 	t_img_buffer	*buffers[4] = {&map->wall_north, &map->wall_south,
-					&map->wall_west, &map->wall_east};
+			&map->wall_west, &map->wall_east};
 
 	if (!map || !map->mlx)
 		return (printf("Error: mlx not initialized\n"), 0);
-
 	i = 0;
 	while (i < 4)
 	{
 		buffers[i]->img = mlx_xpm_file_to_image(map->mlx, paths[i],
 				&buffers[i]->width, &buffers[i]->height);
 		if (!buffers[i]->img)
-		{
-			destroy_loaded_textures(map, buffers, i - 1);
-			return (0);
-		}
-
+			return (destroy_loaded_textures(map, buffers, i - 1), 0);
 		buffers[i]->address = mlx_get_data_addr(buffers[i]->img,
 				&buffers[i]->Bits_Per_Pixel, &buffers[i]->line_octet_length,
 				&buffers[i]->octet_order);
 		if (!buffers[i]->address)
-		{
-			mlx_destroy_image(map->mlx, buffers[i]->img);
-			buffers[i]->img = NULL;
-			destroy_loaded_textures(map, buffers, i - 1);
-			return (0);
-		}
+			return (mlx_destroy_image(map->mlx, buffers[i]->img),
+				buffers[i]->img = NULL, destroy_loaded_textures(map, buffers, i
+					- 1), 0);
 		i++;
 	}
 	return (1);
 }
-
 
 int	verif_load_xpm(t_data *data, t_map *map)
 {
@@ -98,7 +90,6 @@ int	verif_load_xpm(t_data *data, t_map *map)
 			return (0);
 		i++;
 	}
-
 	if (!has_xpm_extension(data))
 		return (printf("xpm paths error \n"), 0);
 	if (!load_xpm(map, data))

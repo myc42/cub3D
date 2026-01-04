@@ -6,7 +6,7 @@
 /*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 21:46:36 by macoulib          #+#    #+#             */
-/*   Updated: 2026/01/03 17:36:20 by macoulib         ###   ########.fr       */
+/*   Updated: 2026/01/04 15:38:10 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,33 @@
 # define ROT_SPEED 0.0005
 # define MOUSE_CENTER_X (SCREEN_W / 2)
 # define MOUSE_CENTER_Y (SCREEN_H / 2)
+
+
+typedef struct s_point
+{
+	int x;
+	int y;
+} t_point;
+
+typedef struct s_bres
+{
+	int dx;
+	int dy;
+	int sx;
+	int sy;
+	int err;
+} t_bres;
+
+
+typedef struct s_pointcardinaux
+{
+	int				no;
+	int				so;
+	int				we;
+	int				ea;
+	int				f;
+	int				c;
+}					t_pointcardinaux;
 
 typedef struct s_tex
 {

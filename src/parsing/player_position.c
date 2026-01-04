@@ -6,11 +6,22 @@
 /*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 19:40:21 by macoulib          #+#    #+#             */
-/*   Updated: 2025/11/25 19:58:07 by macoulib         ###   ########.fr       */
+/*   Updated: 2026/01/04 15:20:10 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+static int	get_angle(char c)
+{
+	if (c == 'N')
+		return (270);
+	if (c == 'S')
+		return (90);
+	if (c == 'E')
+		return (0);
+	return (180);
+}
 
 void	position_player(t_map *map, t_data *data)
 {
@@ -29,14 +40,7 @@ void	position_player(t_map *map, t_data *data)
 			{
 				map->px = x + 0.5f;
 				map->py = y + 0.5f;
-				if (c == 'N')
-					map->angle = 270;
-				else if (c == 'S')
-					map->angle = 90;
-				else if (c == 'E')
-					map->angle = 0;
-				else if (c == 'W')
-					map->angle = 180;
+				map->angle = get_angle(c);
 				data->map[y][x] = '0';
 				return ;
 			}
@@ -45,4 +49,3 @@ void	position_player(t_map *map, t_data *data)
 		y++;
 	}
 }
-

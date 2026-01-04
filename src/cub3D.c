@@ -6,7 +6,7 @@
 /*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 21:43:28 by macoulib          #+#    #+#             */
-/*   Updated: 2025/12/30 20:56:41 by macoulib         ###   ########.fr       */
+/*   Updated: 2026/01/04 15:26:34 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	main(int ac, char **av)
 {
 	t_map	*map;
 	t_data	*data;
+
 
 	map = ft_calloc(1, sizeof(t_map));
 	if (!map)

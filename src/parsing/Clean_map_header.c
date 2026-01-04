@@ -6,7 +6,7 @@
 /*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 01:47:52 by macoulib          #+#    #+#             */
-/*   Updated: 2026/01/03 17:55:13 by macoulib         ###   ########.fr       */
+/*   Updated: 2026/01/04 14:35:34 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int	clean_map_file_content(t_data *data)
 	char	*cleaned;
 
 	i = 0;
+	if (!data->map_file_content || data->map_start <= 0)
+		return (0);
 	while (data->map_file_content[i])
 	{
 		cleaned = trim_start_spaces(data->map_file_content[i]);
@@ -44,6 +46,30 @@ int	clean_map_file_content(t_data *data)
 		i++;
 	}
 	return (1);
+}
+
+static void	handle_fc_and_copy(t_data *data, char **new_header, int j)
+{
+	int	i;
+
+	i = 0;
+	while (data->map_header[i])
+	{
+		if (!ft_strncmp(data->map_header[i], "F ", 2)
+			|| !ft_strncmp(data->map_header[i], "C ", 2))
+		{
+			new_header[j++] = data->map_header[i];
+		}
+		i++;
+	}
+	new_header[j] = NULL;
+	i = 0;
+	while (new_header[i])
+	{
+		data->map_header[i] = new_header[i];
+		i++;
+	}
+	data->map_header[i] = NULL;
 }
 
 int	reorder_map_header(t_data *data)
@@ -66,23 +92,7 @@ int	reorder_map_header(t_data *data)
 		i++;
 	}
 	i = 0;
-	while (data->map_header[i])
-	{
-		if (!ft_strncmp(data->map_header[i], "F ", 2)
-			|| !ft_strncmp(data->map_header[i], "C ", 2))
-		{
-			new_header[j++] = data->map_header[i];
-		}
-		i++;
-	}
-	new_header[j] = NULL;
-	i = 0;
-	while (new_header[i])
-	{
-		data->map_header[i] = new_header[i];
-		i++;
-	}
-	data->map_header[i] = NULL;
+	handle_fc_and_copy(data, new_header, j);
 	return (1);
 }
 
@@ -94,7 +104,8 @@ int	check_map_size(char **map)
 	int	height;
 	int	width;
 
-	
+	if (!map)
+		return (0);
 	height = 0;
 	while (map[height])
 		height++;

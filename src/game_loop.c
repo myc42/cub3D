@@ -1,9 +1,10 @@
 #include "cub3d.h"
 
+
 int	is_wall(t_map *map, double y, double x)
 {
-	int	grid_x;
-	int	grid_y;
+	int grid_x;
+	int grid_y;
 
 	grid_x = (int)x;
 	grid_y = (int)y;
@@ -18,8 +19,8 @@ int	is_wall(t_map *map, double y, double x)
 
 void	move_forward_backward(t_map *map)
 {
-	double	new_x;
-	double	new_y;
+	double new_x;
+	double new_y;
 
 	if (map->keys.w)
 	{
@@ -43,10 +44,10 @@ void	move_forward_backward(t_map *map)
 
 void	move_left_right(t_map *map)
 {
-	double	perp_x;
-	double	perp_y;
-	double	new_x;
-	double	new_y;
+	double perp_x;
+	double perp_y;
+	double new_x;
+	double new_y;
 
 	perp_x = -map->player.dir_y;
 	perp_y = map->player.dir_x;
@@ -72,21 +73,20 @@ void	move_left_right(t_map *map)
 
 void	rotate_with_value(t_map *map, double rot)
 {
-	double	old_dir_x;
-	double	old_plane_x;
+	double old_dir_x;
+	double old_plane_x;
 
 	old_dir_x = map->player.dir_x;
 	old_plane_x = map->player.plane_x;
 
-	map->player.dir_x = map->player.dir_x * cos(rot)
-		- map->player.dir_y * sin(rot);
-	map->player.dir_y = old_dir_x * sin(rot)
-		+ map->player.dir_y * cos(rot);
+	map->player.dir_x = map->player.dir_x * cos(rot) - map->player.dir_y
+		* sin(rot);
+	map->player.dir_y = old_dir_x * sin(rot) + map->player.dir_y * cos(rot);
 
-	map->player.plane_x = map->player.plane_x * cos(rot)
-		- map->player.plane_y * sin(rot);
-	map->player.plane_y = old_plane_x * sin(rot)
-		+ map->player.plane_y * cos(rot);
+	map->player.plane_x = map->player.plane_x * cos(rot) - map->player.plane_y
+		* sin(rot);
+	map->player.plane_y = old_plane_x * sin(rot) + map->player.plane_y
+		* cos(rot);
 }
 
 void	rotate_player(t_map *map)
@@ -96,7 +96,6 @@ void	rotate_player(t_map *map)
 	if (map->keys.right)
 		rotate_with_value(map, ROT_SPEED);
 }
-
 
 void	update_player(t_map *map)
 {
