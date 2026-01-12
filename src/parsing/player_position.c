@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "cub3d.h"
 
-static int	get_angle(char c)
+int	get_angle(char c)
 {
 	if (c == 'N')
 		return (270);

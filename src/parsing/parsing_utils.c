@@ -6,11 +6,11 @@
 /*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 21:44:29 by macoulib          #+#    #+#             */
-/*   Updated: 2026/01/04 15:43:09 by macoulib         ###   ########.fr       */
+/*   Updated: 2026/01/12 15:53:18 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "cub3d.h"
 
 int	ft_strcmp(char *s1, char *s2)
 {
@@ -36,7 +36,17 @@ int	ft_isspace(char c)
 	return (0);
 }
 
-int	is_line_empty( char *line)
+int	ftx(char c)
+{
+	if (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f'
+		|| c == '\r')
+	{
+		return (1);
+	}
+	return (0);
+}
+
+int	is_line_empty(char *line)
 {
 	int	i;
 
@@ -50,7 +60,6 @@ int	is_line_empty( char *line)
 	return (1);
 }
 
-
 int	is_closed_map(t_data *data)
 {
 	int	x;
@@ -62,15 +71,14 @@ int	is_closed_map(t_data *data)
 		x = 0;
 		while (data->map[y][x])
 		{
-			if (data->map[y][x] == '0' && (y == 0 || y == data->map_height - 1))
+			if (!is_invalid_border(data, x, y))
 				return (0);
 			if (data->map[y][x] == '0')
 			{
-				if (ft_isspace(data->map[y - 1][x - 1]) || ft_isspace(data->map[y - 1][x])
-				|| ft_isspace(data->map[y - 1][x + 1]) || ft_isspace(data->map[y][x - 1])
-				|| ft_isspace(data->map[y][x + 1]) || ft_isspace(data->map[y + 1][x - 1])
-				|| ft_isspace(data->map[y + 1][x])
-				|| ft_isspace(data->map[y + 1][x + 1]))
+				if (ftx(data->map[y - 1][x - 1]) || ftx(data->map[y - 1][x])
+					|| ftx(data->map[y - 1][x + 1]) || ftx(data->map[y][x - 1])
+					|| ftx(data->map[y][x + 1]) || ftx(data->map[y + 1][x - 1])
+					|| ftx(data->map[y + 1][x]) || ftx(data->map[y + 1][x + 1]))
 					return (0);
 			}
 			x++;
@@ -79,4 +87,3 @@ int	is_closed_map(t_data *data)
 	}
 	return (1);
 }
-

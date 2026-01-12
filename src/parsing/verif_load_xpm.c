@@ -3,23 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   verif_load_xpm.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
+/*   By: knehal <knehal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 14:03:32 by macoulib          #+#    #+#             */
-/*   Updated: 2026/01/04 15:20:24 by macoulib         ###   ########.fr       */
+/*   Updated: 2026/01/09 19:19:01 by knehal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "cub3d.h"
 
 int	has_xpm_extension(t_data *data)
 {
-	char	*paths[4] = {data->wall_north, data->wall_south, data->wall_west,
-			data->wall_east};
+	char	*paths[4];
 	char	*path;
 	int		i;
 	int		len;
 
+	paths[0] = data->wall_north;
+	paths[1] = data->wall_south;
+	paths[2] = data->wall_west;
+	paths[3] = data->wall_east;
 	i = 0;
 	while (i < 4)
 	{
@@ -35,7 +38,8 @@ int	has_xpm_extension(t_data *data)
 	}
 	return (1);
 }
-static void	destroy_loaded_textures(t_map *map, t_img_buffer **buffers,
+
+void	destroy_loaded_textures(t_map *map, t_img_buffer **buffers,
 		int last)
 {
 	while (last >= 0)
@@ -50,14 +54,26 @@ static void	destroy_loaded_textures(t_map *map, t_img_buffer **buffers,
 	}
 }
 
+void	init_texture_arrays(t_map *map, t_data *data, char **paths,
+		t_img_buffer **buffers)
+{
+	paths[0] = data->wall_north;
+	paths[1] = data->wall_south;
+	paths[2] = data->wall_west;
+	paths[3] = data->wall_east;
+	buffers[0] = &map->wall_north;
+	buffers[1] = &map->wall_south;
+	buffers[2] = &map->wall_west;
+	buffers[3] = &map->wall_east;
+}
+
 int	load_xpm(t_map *map, t_data *data)
 {
 	int				i;
-	char			*paths[4] = {data->wall_north, data->wall_south,
-					data->wall_west, data->wall_east};
-	t_img_buffer	*buffers[4] = {&map->wall_north, &map->wall_south,
-			&map->wall_west, &map->wall_east};
+	char			*paths[4];
+	t_img_buffer	*buffers[4];
 
+	init_texture_arrays(map, data, paths, buffers);
 	if (!map || !map->mlx)
 		return (printf("Error: mlx not initialized\n"), 0);
 	i = 0;
@@ -68,7 +84,7 @@ int	load_xpm(t_map *map, t_data *data)
 		if (!buffers[i]->img)
 			return (destroy_loaded_textures(map, buffers, i - 1), 0);
 		buffers[i]->address = mlx_get_data_addr(buffers[i]->img,
-				&buffers[i]->Bits_Per_Pixel, &buffers[i]->line_octet_length,
+				&buffers[i]->bits_per_pixel, &buffers[i]->line_octet_length,
 				&buffers[i]->octet_order);
 		if (!buffers[i]->address)
 			return (mlx_destroy_image(map->mlx, buffers[i]->img),
@@ -81,9 +97,9 @@ int	load_xpm(t_map *map, t_data *data)
 
 int	verif_load_xpm(t_data *data, t_map *map)
 {
-	int i;
-	i = 0;
+	int	i;
 
+	i = 0;
 	while (i < 4)
 	{
 		if (!stock_texture_path(data, i))

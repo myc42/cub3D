@@ -6,11 +6,11 @@
 /*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 01:47:52 by macoulib          #+#    #+#             */
-/*   Updated: 2026/01/04 14:35:34 by macoulib         ###   ########.fr       */
+/*   Updated: 2026/01/04 18:12:49 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "cub3d.h"
 
 char	*trim_start_spaces(char *str)
 {
@@ -48,7 +48,7 @@ int	clean_map_file_content(t_data *data)
 	return (1);
 }
 
-static void	handle_fc_and_copy(t_data *data, char **new_header, int j)
+void	handle_fc_and_copy(t_data *data, char **new_header, int j)
 {
 	int	i;
 
@@ -95,8 +95,6 @@ int	reorder_map_header(t_data *data)
 	handle_fc_and_copy(data, new_header, j);
 	return (1);
 }
-
-#include <stdlib.h>
 
 int	check_map_size(char **map)
 {

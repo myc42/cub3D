@@ -6,32 +6,11 @@
 /*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 15:16:21 by macoulib          #+#    #+#             */
-/*   Updated: 2026/01/04 15:29:49 by macoulib         ###   ########.fr       */
+/*   Updated: 2026/01/09 21:06:26 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
-
-void	free_partial(char **tab, int n)
-{
-	int	i;
-
-	if (!tab)
-		return ;
-	i = 0;
-	while (i < n)
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-}
-
-void	init_ij(int *i, int *j)
-{
-	*i = -1;
-	*j = 0;
-}
+#include "cub3d.h"
 
 int	init_map_header(t_data *data)
 {
@@ -60,18 +39,6 @@ int	init_map_header(t_data *data)
 		}
 	}
 	return (data->map_header[j] = NULL, reorder_map_header(data), 1);
-}
-
-void	init_ij_mapline(t_data *data, int *i, int *j, int *mapline)
-{
-	*i = data->map_start;
-	*j = 0;
-	*mapline = 0;
-	while (data->map_file_content[*i])
-	{
-		(*mapline)++;
-		(*i)++;
-	}
 }
 
 int	init_map(t_data *data)
@@ -116,18 +83,6 @@ int	is_id(char *s, char a, char b)
 	return (1);
 }
 
-// int (x), (y) = -1;
-
-void	init_point(t_pointcardinaux *p)
-{
-	p->no = 0;
-	p->so = 0;
-	p->we = 0;
-	p->ea = 0;
-	p->f = 0;
-	p->c = 0;
-}
-
 int	check_duplicates(t_data *data)
 {
 	int					i;
@@ -161,7 +116,8 @@ int	map_management(t_data *data, char *av)
 {
 	data->color_floor = -1;
 	data->color_cielling = -1;
-	get_map(data, av);
+	if (!get_map(data, av))
+		return (0);
 	if (!find_map_start(data))
 		return (printf("pas de map "), 0);
 	if (!clean_map_file_content(data))

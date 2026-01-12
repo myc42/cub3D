@@ -2,19 +2,15 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   controls.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+
-	+:+     */
-/*   By: macoulib <macoulib@student.42.fr>          +#+  +:+
-	+#+        */
-/*                                                +#+#+#+#+#+
-	+#+           */
-/*   Created: 2026/01/03 19:01:12 by macoulib          #+#    #+#             */
-/*   Updated: 2026/01/03 19:01:12 by macoulib         ###   ########.fr       */
+/*                                                    +:+ +:+         +:+     */
+/*   By: knehal <knehal@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/04 20:43:19 by knehal            #+#    #+#             */
+/*   Updated: 2026/01/04 20:43:19 by knehal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
 
 int	key_press(int keycode, t_map *map)
 {

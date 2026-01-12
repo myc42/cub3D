@@ -6,11 +6,11 @@
 /*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 21:43:28 by macoulib          #+#    #+#             */
-/*   Updated: 2026/01/04 15:26:34 by macoulib         ###   ########.fr       */
+/*   Updated: 2026/01/09 20:56:53 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "cub3d.h"
 
 int	init_window_and_hooks(t_map *map)
 {
@@ -34,7 +34,6 @@ int	main(int ac, char **av)
 {
 	t_map	*map;
 	t_data	*data;
-
 
 	map = ft_calloc(1, sizeof(t_map));
 	if (!map)

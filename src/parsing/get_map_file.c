@@ -6,15 +6,15 @@
 /*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 19:49:19 by macoulib          #+#    #+#             */
-/*   Updated: 2026/01/03 19:24:29 by macoulib         ###   ########.fr       */
+/*   Updated: 2026/01/09 21:05:35 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "cub3d.h"
 
 void	echecouverturedufichier(t_data *data)
 {
-	printf("❌ echec d'ouverture du fichier \n");
+	printf("echec d'ouverture du fichier \n");
 	free(data);
 	exit(0);
 }
@@ -30,7 +30,7 @@ char	*freestats(char *staticbuffer, char *buffer)
 	return (temp);
 }
 
-void	get_map(t_data *data, char *av)
+int	get_map(t_data *data, char *av)
 {
 	int		fd;
 	char	*linestock;
@@ -38,7 +38,7 @@ void	get_map(t_data *data, char *av)
 
 	fd = open(av, O_RDONLY);
 	if (fd == -1)
-		echecouverturedufichier(data);
+		return (printf("echec d'ouverture du fichier \n"), 0);
 	linestock = ft_strdup("");
 	while (1)
 	{
@@ -56,6 +56,7 @@ void	get_map(t_data *data, char *av)
 	close(fd);
 	data->map_file_content = ft_split(linestock, '\n');
 	free(linestock);
+	return (1);
 }
 
 int	is_map_line(char *line)
@@ -74,11 +75,10 @@ int	is_map_line(char *line)
 	return (1);
 }
 
-
 int	find_map_start(t_data *data)
 {
-	int i;
-	char *chartrim;
+	int		i;
+	char	*chartrim;
 
 	if (!data->map_file_content)
 		return (0);
@@ -86,13 +86,10 @@ int	find_map_start(t_data *data)
 	while (data->map_file_content[i])
 	{
 		chartrim = ft_strtrim(data->map_file_content[i], " \t\n");
-		
 		if (!chartrim)
 			return (0);
-
 		if (*chartrim && is_map_line(chartrim))
 		{
-			
 			free(chartrim);
 			data->map_start = i;
 			return (1);

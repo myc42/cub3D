@@ -2,19 +2,15 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+
-	+:+     */
-/*   By: macoulib <macoulib@student.42.fr>          +#+  +:+
-	+#+        */
-/*                                                +#+#+#+#+#+
-	+#+           */
-/*   Created: 2026/01/03 19:01:25 by macoulib          #+#    #+#             */
-/*   Updated: 2026/01/03 19:01:25 by macoulib         ###   ########.fr       */
+/*                                                    +:+ +:+         +:+     */
+/*   By: knehal <knehal@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/04 20:41:42 by knehal            #+#    #+#             */
+/*   Updated: 2026/01/04 20:41:42 by knehal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
 
 void	destroy_img(void *mlx, t_img_buffer *img)
 {
@@ -36,19 +32,17 @@ void	free_data(t_data *d)
 
 void	cleanup_all(t_map *map)
 {
-	t_data *d;
+	t_data	*d;
 
 	if (!map)
 		return ;
 	d = map->data;
-
 	destroy_img(map->mlx, &map->wall_north);
 	destroy_img(map->mlx, &map->wall_south);
 	destroy_img(map->mlx, &map->wall_west);
 	destroy_img(map->mlx, &map->wall_east);
 	destroy_img(map->mlx, &map->buffer[0]);
 	destroy_img(map->mlx, &map->buffer[1]);
-
 	if (map->mlx && map->win)
 	{
 		mlx_destroy_window(map->mlx, map->win);

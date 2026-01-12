@@ -6,11 +6,11 @@
 /*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:58:53 by macoulib          #+#    #+#             */
-/*   Updated: 2026/01/03 19:14:04 by macoulib         ###   ########.fr       */
+/*   Updated: 2026/01/04 18:16:33 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "cub3d.h"
 
 char	*freestat(char *staticbuffer, char *buffer)
 {
@@ -106,8 +106,8 @@ char	*therest(char *staticbuffer)
 
 char	*get_next_line(int fd)
 {
-	static char *staticbuffer = NULL;
-	char *line;
+	static char	*staticbuffer = NULL;
+	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
@@ -118,4 +118,3 @@ char	*get_next_line(int fd)
 	staticbuffer = therest(staticbuffer);
 	return (line);
 }
-

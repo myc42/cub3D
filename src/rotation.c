@@ -1,10 +1,21 @@
-#include "../includes/cub3d.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rotation.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: knehal <knehal@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/04 20:45:50 by knehal            #+#    #+#             */
+/*   Updated: 2026/01/04 20:45:50 by knehal           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "cub3d.h"
 
 int	mouse_move(int x, int y, t_map *map)
 {
-	int dx;
-	double rot;
+	int		dx;
+	double	rot;
 
 	(void)y;
 	if (!map)

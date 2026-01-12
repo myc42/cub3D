@@ -6,7 +6,7 @@
 /*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 21:46:36 by macoulib          #+#    #+#             */
-/*   Updated: 2026/01/04 15:38:10 by macoulib         ###   ########.fr       */
+/*   Updated: 2026/01/12 15:52:07 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,27 +43,23 @@
 # define SCREEN_H 480
 # define MOUSE_SENS 0.002
 
-# define MOVE_SPEED 0.0008
-# define ROT_SPEED 0.0005
-# define MOUSE_CENTER_X (SCREEN_W / 2)
-# define MOUSE_CENTER_Y (SCREEN_H / 2)
-
+# define MOVE_SPEED 0.003
+# define ROT_SPEED 0.005
 
 typedef struct s_point
 {
-	int x;
-	int y;
-} t_point;
+	int				x;
+	int				y;
+}					t_point;
 
 typedef struct s_bres
 {
-	int dx;
-	int dy;
-	int sx;
-	int sy;
-	int err;
-} t_bres;
-
+	int				dx;
+	int				dy;
+	int				sx;
+	int				sy;
+	int				err;
+}					t_bres;
 
 typedef struct s_pointcardinaux
 {
@@ -74,17 +70,6 @@ typedef struct s_pointcardinaux
 	int				f;
 	int				c;
 }					t_pointcardinaux;
-
-typedef struct s_tex
-{
-	void			*img;
-	char			*addr;
-	int				w;
-	int				h;
-	int				bpp;
-	int				line_len;
-	int				endian;
-}					t_tex;
 
 typedef struct s_player
 {
@@ -110,7 +95,7 @@ typedef struct s_img_buffer
 {
 	void			*img;
 	char			*address;
-	int				Bits_Per_Pixel;
+	int				bits_per_pixel;
 	int				line_octet_length;
 	int				octet_order;
 	int				width;
@@ -123,7 +108,6 @@ typedef struct s_data
 	char			**map;
 	char			**map_header;
 	int				map_start;
-	int				index_end;
 	int				map_height;
 	int				map_rows;
 	char			*wall_west;
@@ -132,10 +116,6 @@ typedef struct s_data
 	char			*wall_east;
 	int				color_floor;
 	int				color_cielling;
-	t_tex			no;
-	t_tex			so;
-	t_tex			we;
-	t_tex			ea;
 
 }					t_data;
 
@@ -159,7 +139,6 @@ typedef struct s_map
 	t_img_buffer	wall_north;
 	t_img_buffer	wall_south;
 	t_img_buffer	wall_east;
-	t_img_buffer	ground;
 
 	float			px;
 	float			py;
@@ -202,10 +181,7 @@ int					check_map_outline(t_data *data);
 int					verif_map_element(t_data *data);
 char				*get_next_line(int fd);
 int					validate_args(int argc, char **argv);
-void				get_map(t_data *data, char *av);
-int					check_map_rectangular(t_data *data);
-int					check_map_outline(t_data *data);
-int					verif_map_element(t_data *data);
+int					get_map(t_data *data, char *av);
 void				position_player(t_map *map, t_data *data);
 int					initialize_mlx(t_map *map);
 int					ft_strcmp(char *s1, char *s2);
@@ -234,5 +210,37 @@ int					mouse_move(int x, int y, t_map *map);
 int					clean_map_file_content(t_data *data);
 int					reorder_map_header(t_data *data);
 int					is_closed_map(t_data *data);
-
+int					is_space(char c);
+int					skip_spaces(char *s, int i);
+int					parse_int_0_255(char *s, int *i, int *out);
+void				init_ij(int *i, int *j);
+void				free_partial(char **tab, int n);
+void				init_point(t_pointcardinaux *p);
+void				init_ij_mapline(t_data *data, int *i, int *j, int *mapline);
+int					is_closed_line(char *line);
+int					is_wall(t_map *map, double y, double x);
+void				move_forward_backward(t_map *map);
+int					ft_abs(int n);
+void				put_pixel_mm(t_img_buffer *img, int x, int y, int color);
+void				draw_square(t_img_buffer *buf, t_point origin, int size,
+						int color);
+void				init_bresen(t_bres *b, t_point start, t_point end);
+void				put_pixel(t_img_buffer *img, int x, int y, int color);
+unsigned int		get_texel(t_img_buffer *tex, int x, int y);
+int					get_map_size(t_map *map, int *h, int *w);
+int					is_wall_cell(t_map *map, int map_h, int y, int x);
+void				init_ray(t_map *map, t_ray *r, int x);
+void				compute_texture_coords(t_map *map, t_ray *r);
+void				draw_column(t_map *map, t_img_buffer *buf, t_ray *r, int x);
+void				render_fame2(t_img_buffer *buf, t_map *map);
+void				select_texture(t_map *map, t_ray *r);
+void				init_dda(t_map *map, t_ray *r);
+void				init_dda_y(t_map *map, t_ray *r);
+void				compute_projection(t_ray *r);
+void				do_dda(t_map *map, t_ray *r, int map_h);
+int					is_walkable(char c);
+char				map_at(t_data *data, int y, int x);
+void				set_colors_and_grid(t_data *data, t_map *map);
+void				set_colors_and_grid(t_data *data, t_map *map);
+int					is_invalid_border(t_data *data, int x, int y);
 #endif
