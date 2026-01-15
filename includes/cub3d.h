@@ -6,7 +6,7 @@
 /*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 21:46:36 by macoulib          #+#    #+#             */
-/*   Updated: 2026/01/12 15:52:07 by macoulib         ###   ########.fr       */
+/*   Updated: 2026/01/15 20:42:32 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,4 +243,6 @@ char				map_at(t_data *data, int y, int x);
 void				set_colors_and_grid(t_data *data, t_map *map);
 void				set_colors_and_grid(t_data *data, t_map *map);
 int					is_invalid_border(t_data *data, int x, int y);
+int					checkeursx(t_data *data, int y, int x, int width);
+int					ftx(char c);
 #endif

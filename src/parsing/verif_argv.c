@@ -6,7 +6,7 @@
 /*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 15:39:39 by macoulib          #+#    #+#             */
-/*   Updated: 2026/01/12 15:54:10 by macoulib         ###   ########.fr       */
+/*   Updated: 2026/01/15 21:11:00 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,27 @@ int	is_invalid_border(t_data *data, int x, int y)
 		return (0);
 	if (data->map[y][x] == '0' && (x == 0 || data->map[y][x + 1] == '\0'))
 		return (printf("map border erreur"), 0);
+	return (1);
+}
+
+int	checkeursx(t_data *data, int y, int x, int width)
+{
+	if (y > 0 && x > 0 && ftx(data->map[y - 1][x - 1]))
+		return (0);
+	if (y > 0 && ftx(data->map[y - 1][x]))
+		return (0);
+	if (y > 0 && x < width - 1 && ftx(data->map[y - 1][x + 1]))
+		return (0);
+	if (x > 0 && ftx(data->map[y][x - 1]))
+		return (0);
+	if (x < width - 1 && ftx(data->map[y][x + 1]))
+		return (0);
+	if (y < data->map_height - 1 && x > 0 && ftx(data->map[y + 1][x - 1]))
+		return (0);
+	if (y < data->map_height - 1 && ftx(data->map[y + 1][x]))
+		return (0);
+	if (y < data->map_height - 1 && x < width - 1 && ftx(data->map[y + 1][x
+			+ 1]))
+		return (0);
 	return (1);
 }

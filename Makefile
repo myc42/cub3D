@@ -61,11 +61,11 @@ $(OBJ_DIR)/%.o: src/%.c
 
 clean:
 	rm -rf $(OBJ_DIR)
-	$(MAKE) -C $(MLX_DIR) clean || true
+	
 
 fclean: clean
 	rm -f $(NAME)
-	$(MAKE) -C $(LIBFT_DIR) fclean || true
+	
 
 re: fclean all
 

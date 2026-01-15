@@ -6,7 +6,7 @@
 /*   By: macoulib <macoulib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 21:44:29 by macoulib          #+#    #+#             */
-/*   Updated: 2026/01/12 15:53:18 by macoulib         ###   ########.fr       */
+/*   Updated: 2026/01/15 21:09:48 by macoulib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,23 +62,22 @@ int	is_line_empty(char *line)
 
 int	is_closed_map(t_data *data)
 {
-	int	x;
-	int	y;
-
+	int (x), (y), (width) = 0;
+	if (data->map_height == 0)
+		return (0);
+	while (data->map[0][width])
+		width++;
 	y = 0;
 	while (y < data->map_height)
 	{
 		x = 0;
-		while (data->map[y][x])
+		while (x < width)
 		{
 			if (!is_invalid_border(data, x, y))
 				return (0);
 			if (data->map[y][x] == '0')
 			{
-				if (ftx(data->map[y - 1][x - 1]) || ftx(data->map[y - 1][x])
-					|| ftx(data->map[y - 1][x + 1]) || ftx(data->map[y][x - 1])
-					|| ftx(data->map[y][x + 1]) || ftx(data->map[y + 1][x - 1])
-					|| ftx(data->map[y + 1][x]) || ftx(data->map[y + 1][x + 1]))
+				if (!checkeursx(data, y, x, width))
 					return (0);
 			}
 			x++;
